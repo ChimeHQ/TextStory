@@ -47,7 +47,7 @@ func applyNextChange()
 
 ## TextStoring
 
-A simple protocol that abstracts string storage. This is very useful for standardizing behavior across NSTextStorage, NSTextView and other objecs you may use for text manipulation. Particularly handy for testing and decoupling systems from Apple's classes behaviors/APIs.
+A simple protocol that abstracts string storage. This is very useful for standardizing behavior across NSTextStorage, NSTextView and other objects you may use for text manipulation. Particularly handy for testing and decoupling systems from Apple's classes behaviors/APIs.
 
 ### Suggestions or Feedback
 
