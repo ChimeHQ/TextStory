@@ -1,0 +1,14 @@
+//
+//  Project.xcconfig
+//  TextStory
+//
+//  Created by Matt Massicotte on 2020-01-19.
+//  Copyright © 2020 Chime Systems Inc. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+FRAMEWORK_SEARCH_PATHS = $(PROJECT_DIR)/Carthage/Build/Mac $(PROJECT_DIR)/Carthage/Build/Mac/Static
+SWIFT_VERSION = 5.1
+MACOSX_DEPLOYMENT_TARGET = 10.12

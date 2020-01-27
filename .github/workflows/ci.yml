@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  test:
+    name: Test
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: install swiftlint
+        run: HOMEBREW_NO_INSTALL_CLEANUP=1 brew install swiftlint
+      - name: install dependnecies
+        run: carthage bootstrap
+      - name: xcodebuild test
+        run: set -o pipefail && xcodebuild test -scheme TextStory -destination "platform=macOS" | xcpretty

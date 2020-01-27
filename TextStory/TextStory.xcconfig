@@ -1,0 +1,19 @@
+//
+//  TextStory.xcconfig
+//  TextStory
+//
+//  Created by Matt Massicotte on 2020-01-02.
+//  Copyright © 2020 Chime Systems Inc. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+PRODUCT_NAME = TextStory
+PRODUCT_BUNDLE_IDENTIFIER = com.chimehq.TextStory
+PRODUCT_MODULE_NAME = TextStory
+CURRENT_PROJECT_VERSION = 1
+MARKETING_VERSION = 0.1
+
+INFOPLIST_FILE = TextStory/Info.plist
+MACH_O_TYPE = staticlib

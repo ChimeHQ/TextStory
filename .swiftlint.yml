@@ -1,0 +1,7 @@
+excluded:
+  - Carthage
+
+disabled_rules:
+  - trailing_comma
+  - file_length
+  - unused_closure_parameter
