@@ -10,13 +10,16 @@ on:
 
 jobs:
   test:
-    name: Test
+    name: Test on destination ${{ matrix.destination }}
     runs-on: macOS-latest
+    strategy:
+      matrix:
+        destination: ["platform=macOS", "platform=iOS Simulator,name=iPhone 8"]
     steps:
       - uses: actions/checkout@v1
       - name: install swiftlint
         run: HOMEBREW_NO_INSTALL_CLEANUP=1 brew install swiftlint
-      - name: install dependnecies
+      - name: install dependencies
         run: carthage bootstrap
-      - name: xcodebuild test
-        run: set -o pipefail && xcodebuild test -scheme TextStory -destination "platform=macOS" | xcpretty
+      - name: xcodebuild test ${{ matrix.destination }}
+        run: set -o pipefail && xcodebuild test -scheme TextStory -destination "${{ matrix.destination }}" | xcpretty

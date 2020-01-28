@@ -7,7 +7,11 @@
 //
 
 import Foundation
+#if os(macOS)
 import class AppKit.NSTextStorage
+#else
+import class UIKit.NSTextStorage
+#endif
 
 extension NSTextStorage: TextStoring {
     public func applyMutation(_ mutation: TextMutation) {

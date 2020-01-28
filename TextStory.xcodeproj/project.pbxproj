@@ -95,8 +95,8 @@
 		C9C7D74023ACF3B000282686 /* TextStory */ = {
 			isa = PBXGroup;
 			children = (
-				C9C7D74123ACF3B000282686 /* TextStory.h */,
 				C9C7D74223ACF3B000282686 /* Info.plist */,
+				C9C7D74123ACF3B000282686 /* TextStory.h */,
 				C9C7D7A223BE780E00282686 /* TSYTextStorage.h */,
 				C9C7D7A323BE780E00282686 /* TSYTextStorage.m */,
 				C9C7D7A623BE7B1400282686 /* BufferingTextStorage.swift */,

@@ -3,13 +3,17 @@
 
 # TextStory
 
-TextStory is a small set of classes and protocols for easier work with NSTextStorage and associated systems.
+TextStory is a small set of classes and protocols for easier work with NSTextStorage and associated systems. iOS and macOS are supported.
 
 ## Integration
 
 Swift Package Manager:
 
-TextStory has an Objective-C component, so is currently not compatible with SPM :(
+```swift
+dependencies: [
+    .package(url: "https://github.com/ChimeHQ/TextStory", .from("0.2"))
+]
+```
 
 Carthage:
 
@@ -28,6 +32,7 @@ Unfortunately, to date I've not been able to figure out a way to build this clas
 - (void)textStorage:(TSYTextStorage *)textStorage didReplaceCharactersInRange:(NSRange)range withString:(NSString *)string;
 - (void)textStorageProcessEditingComplete:(TSYTextStorage *)textStorage;
 
+// available for macOS only
 - (NSRange)textStorage:(TSYTextStorage *)textStorage doubleClickRangeForLocation:(NSUInteger)location;
 - (NSUInteger)textStorage:(TSYTextStorage *)textStorage nextWordIndexFromLocation:(NSUInteger)location direction:(BOOL)forward;
 ```

@@ -6,7 +6,13 @@
 //  Copyright © 2020 Chime Systems Inc. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_OSX
+#import <AppKit/NSTextStorage.h>
+#else
+#import <UIKit/NSTextStorage.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,8 +35,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)textStorage:(TSYTextStorage *)textStorage didReplaceCharactersInRange:(NSRange)range withString:(NSString *)string;
 - (void)textStorageProcessEditingComplete:(TSYTextStorage *)textStorage;
 
+#if TARGET_OS_OSX
 - (NSRange)textStorage:(TSYTextStorage *)textStorage doubleClickRangeForLocation:(NSUInteger)location;
 - (NSUInteger)textStorage:(TSYTextStorage *)textStorage nextWordIndexFromLocation:(NSUInteger)location direction:(BOOL)forward;
+#endif
 
 @end
 

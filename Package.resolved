@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Rearrange",
+        "repositoryURL": "https://github.com/ChimeHQ/Rearrange.git",
+        "state": {
+          "branch": null,
+          "revision": "6f655554e3561af8e889818919cef16b81c7fb5b",
+          "version": "1.1.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

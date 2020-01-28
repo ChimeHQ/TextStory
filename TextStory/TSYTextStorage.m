@@ -24,6 +24,7 @@
 }
 
 // MARK: NSAttributedString
+#if TARGET_OS_OSX
 - (NSRange)doubleClickAtIndex:(NSUInteger)location {
     if ([self.storageDelegate respondsToSelector:@selector(textStorage:doubleClickRangeForLocation:)]) {
         return [self.storageDelegate textStorage:self doubleClickRangeForLocation:location];
@@ -39,6 +40,7 @@
 
     return [super nextWordFromIndex:location forward:isForward];
 }
+#endif
 
 // MARK: NSMutableAttributedString
 - (instancetype)initWithString:(NSString *)str {
