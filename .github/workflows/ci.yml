@@ -21,5 +21,7 @@ jobs:
         run: HOMEBREW_NO_INSTALL_CLEANUP=1 brew install swiftlint
       - name: install dependencies
         run: carthage bootstrap
+      - name: update submodules
+        run: git submodule update --init
       - name: xcodebuild test ${{ matrix.destination }}
         run: set -o pipefail && xcodebuild test -scheme TextStory -destination "${{ matrix.destination }}" | xcpretty
