@@ -13,6 +13,6 @@ FRAMEWORK_SEARCH_PATHS[sdk=macosx*] = $(PROJECT_DIR)/Carthage/Build/Mac $(PROJEC
 FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*] = $(PROJECT_DIR)/Carthage/Build/iOS $(PROJECT_DIR)/Carthage/Build/iOS/Static
 FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*] = $(PROJECT_DIR)/Carthage/Build/iOS $(PROJECT_DIR)/Carthage/Build/iOS/Static
 
-SWIFT_VERSION = 5.1
+SWIFT_VERSION = 5.2
 MACOSX_DEPLOYMENT_TARGET = 10.12
 IPHONEOS_DEPLOYMENT_TARGET = 10.0

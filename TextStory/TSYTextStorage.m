@@ -8,12 +8,19 @@
 
 #import "TSYTextStorage.h"
 
+@interface TSYTextStorage ()
+
+@property (nonatomic) BOOL hasProcessedEdit;
+
+@end
+
 @implementation TSYTextStorage
 
 - (instancetype)initWithStorage:(NSTextStorage *)textStorage {
     self = [super init];
     if (self) {
         _internalStorage = textStorage;
+        _hasProcessedEdit = NO;
     }
 
     return self;
@@ -88,6 +95,32 @@
 // MARK: NSTextStorage
 - (void)processEditing {
     [super processEditing];
+
+    assert(self.hasProcessedEdit == NO);
+    self.hasProcessedEdit = YES;
+}
+
+- (void)endEditing {
+    [super endEditing];
+
+    // This is a strange dance to do, here's what's going on.
+    //
+    // - NSTextStorage tracks editing state, using begin/endEditing
+    // - That state is accessed by the text system internally using
+    //   the private _isEditing method
+    // - Causing NSLayoutManager to do layout when _isEditing returns
+    //   YES will result in an exception.
+    // - That state appears to be updated only upon completion of
+    //   the outer-most endEditing, **not** within -processEditing
+    //
+    // So, even though logically we want to dispatch our delegate call in
+    // -processEditing, we actually need to ensure that the last endEditing
+    // completes to update the internal state first.
+    if (self.hasProcessedEdit == NO) {
+        return;
+    }
+
+    self.hasProcessedEdit = NO;
 
     if ([self.storageDelegate respondsToSelector:@selector(textStorageProcessEditingComplete:)]) {
         [self.storageDelegate textStorageProcessEditingComplete:self];
