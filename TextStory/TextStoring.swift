@@ -56,3 +56,17 @@ public extension TextStoring {
         return TextMutation(string: originalString, range: newRange, limit: limit)
     }
 }
+
+public extension TextStoring {
+    func applyMutations(_ mutations: [TextMutation]) {
+        // sort them in order of affected location
+        let sorted = mutations.sorted { (mutA, mutB) -> Bool in
+            return mutA.range.location < mutB.range.location
+        }
+
+        // apply them in reverse, so they do not affect each other
+        for mutation in sorted.reversed() {
+            applyMutation(mutation)
+        }
+    }
+}

@@ -33,4 +33,18 @@ class TextStoringTests: XCTestCase {
 
         XCTAssertEqual(storage.string, "")
     }
+
+    func testApplyMutations() {
+        let storage = NSTextStorage(string: "abc")
+
+        let mutations = [
+            TextMutation(string: "f", range: NSRange(2..<3), limit: 3),
+            TextMutation(string: "d", range: NSRange(0..<1), limit: 3),
+            TextMutation(string: "", range: NSRange(1..<2), limit: 3)
+        ]
+
+        storage.applyMutations(mutations)
+
+        XCTAssertEqual(storage.string, "df")
+    }
 }
