@@ -47,4 +47,28 @@ class TextStoringTests: XCTestCase {
 
         XCTAssertEqual(storage.string, "df")
     }
+
+    func testPostApplyRangeWithAddition() {
+        let mutation = TextMutation(string: "hello", range: NSRange(0..<0), limit: 0)
+
+        XCTAssertEqual(mutation.postApplyRange, NSRange(0..<5))
+    }
+
+    func testPostApplyRangeWithDeletion() {
+        let mutation = TextMutation(string: "", range: NSRange(0..<5), limit: 0)
+
+        XCTAssertEqual(mutation.postApplyRange, NSRange(0..<0))
+    }
+
+    func testPostApplyRangeWithFullReplacement() {
+        let mutation = TextMutation(string: "hello", range: NSRange(0..<5), limit: 0)
+
+        XCTAssertEqual(mutation.postApplyRange, NSRange(0..<5))
+    }
+
+    func testPostApplyRangeWithAdditionReplacement() {
+        let mutation = TextMutation(string: "hh", range: NSRange(0..<1), limit: 0)
+
+        XCTAssertEqual(mutation.postApplyRange, NSRange(0..<2))
+    }
 }

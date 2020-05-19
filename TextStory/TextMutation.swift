@@ -44,4 +44,12 @@ public extension TextMutation {
     var inverseRange: NSRange {
         return NSRange(location: range.location, length: stringLength)
     }
+
+    /// The range this mutation represents in the target after it has been applied
+    var postApplyRange: NSRange {
+        let start = range.location
+        let end = range.max + delta
+
+        return NSRange(start..<end)
+    }
 }
