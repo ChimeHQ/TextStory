@@ -72,3 +72,20 @@ class TextStoringTests: XCTestCase {
         XCTAssertEqual(mutation.postApplyRange, NSRange(0..<2))
     }
 }
+
+extension TextStoringTests {
+    func testFullRange() {
+        let storage = NSTextStorage(string: "abc")
+
+        XCTAssertEqual(storage.fullRange, NSRange(0..<3))
+    }
+
+    func testInsertString() {
+        let storage = NSTextStorage(string: "abc")
+
+        storage.insertString("def", at: 3)
+        storage.insertString("123", at: 0)
+
+        XCTAssertEqual(storage.string, "123abcdef")
+    }
+}

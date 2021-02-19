@@ -9,6 +9,7 @@
 import Foundation
 
 public protocol TextStoring {
+    /// Returns the UTF-16 length of the receiver
     var length: Int { get }
 
     func substring(from range: NSRange) -> String?
@@ -30,6 +31,7 @@ public extension TextStoring {
         applyMutation(mutation)
     }
 
+    /// Returns an NSRange from 0 to the UTF-16 length
     var fullRange: NSRange {
         return NSRange(location: 0, length: length)
     }
