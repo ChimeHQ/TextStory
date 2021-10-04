@@ -7,6 +7,7 @@ let package = Package(
     platforms: [.macOS(.v10_12), .iOS(.v10)],
     products: [
         .library(name: "TextStory", targets: ["TextStory"]),
+        .library(name: "TextStoryTesting", targets: ["TextStoryTesting"]),
     ],
     dependencies: [
         .package(url: "https://github.com/ChimeHQ/Rearrange.git", from: "1.1.2")
@@ -24,6 +25,7 @@ let package = Package(
             // hack #3 - the import statement needs to be conditional, so Xcode builds work normally
             swiftSettings: [.define("SPM_BUILD")]
         ),
-        .testTarget(name: "TextStoryTests", dependencies: ["TextStory"], path: "TextStoryTests/"),
+        .target(name: "TextStoryTesting", dependencies: ["TextStory"], path: "TextStoryTesting"),
+        .testTarget(name: "TextStoryTests", dependencies: ["TextStory", "TextStoryTesting"], path: "TextStoryTests/"),
     ]
 )

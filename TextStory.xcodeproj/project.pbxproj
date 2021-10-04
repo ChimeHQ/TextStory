@@ -19,6 +19,9 @@
 		C9C7D7AE23BEDD3A00282686 /* NSTextStorage+TextStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C7D7AD23BEDD3900282686 /* NSTextStorage+TextStoring.swift */; };
 		C9C7D7B423BEDDFF00282686 /* BufferingTextStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C7D7B223BEDDFF00282686 /* BufferingTextStorageTests.swift */; };
 		C9C7D7B723BF682200282686 /* Rearrange.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9C7D77623AE798F00282686 /* Rearrange.framework */; };
+		C9F74F61270B2D6500AEA7F1 /* TextStoringMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F74F60270B2D6500AEA7F1 /* TextStoringMonitor.swift */; };
+		C9F74F63270B2DAE00AEA7F1 /* CompositeTextStoringMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F74F62270B2DAE00AEA7F1 /* CompositeTextStoringMonitor.swift */; };
+		C9F74F65270B2DD600AEA7F1 /* LazyTextStoringMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F74F64270B2DD600AEA7F1 /* LazyTextStoringMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +53,9 @@
 		C9C7D7AD23BEDD3900282686 /* NSTextStorage+TextStoring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextStorage+TextStoring.swift"; sourceTree = "<group>"; };
 		C9C7D7B223BEDDFF00282686 /* BufferingTextStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferingTextStorageTests.swift; sourceTree = "<group>"; };
 		C9C7D7B823BF684900282686 /* TextStoryTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = TextStoryTests.xcconfig; sourceTree = "<group>"; };
+		C9F74F60270B2D6500AEA7F1 /* TextStoringMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStoringMonitor.swift; sourceTree = "<group>"; };
+		C9F74F62270B2DAE00AEA7F1 /* CompositeTextStoringMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeTextStoringMonitor.swift; sourceTree = "<group>"; };
+		C9F74F64270B2DD600AEA7F1 /* LazyTextStoringMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyTextStoringMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,9 @@
 				C9C7D7AB23BEDD2C00282686 /* TextStoring.swift */,
 				C9C7D7AD23BEDD3900282686 /* NSTextStorage+TextStoring.swift */,
 				C990C99223D48CBA00203A47 /* Project.xcconfig */,
+				C9F74F60270B2D6500AEA7F1 /* TextStoringMonitor.swift */,
+				C9F74F62270B2DAE00AEA7F1 /* CompositeTextStoringMonitor.swift */,
+				C9F74F64270B2DD600AEA7F1 /* LazyTextStoringMonitor.swift */,
 			);
 			path = TextStory;
 			sourceTree = "<group>";
@@ -262,10 +271,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9F74F61270B2D6500AEA7F1 /* TextStoringMonitor.swift in Sources */,
 				C9C7D7A523BE780E00282686 /* TSYTextStorage.m in Sources */,
+				C9F74F65270B2DD600AEA7F1 /* LazyTextStoringMonitor.swift in Sources */,
 				C9C7D7AE23BEDD3A00282686 /* NSTextStorage+TextStoring.swift in Sources */,
 				C9C7D7A723BE7B1400282686 /* BufferingTextStorage.swift in Sources */,
 				C9C7D7AA23BE7BEE00282686 /* TextMutation.swift in Sources */,
+				C9F74F63270B2DAE00AEA7F1 /* CompositeTextStoringMonitor.swift in Sources */,
 				C9C7D7AC23BEDD2C00282686 /* TextStoring.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

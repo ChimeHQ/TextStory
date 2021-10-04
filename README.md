@@ -54,6 +54,18 @@ func applyNextChange()
 
 A simple protocol that abstracts string storage. This is very useful for standardizing behavior across `NSTextStorage`, `NSTextView` and other objects you may use for text manipulation. Particularly handy for testing and decoupling systems from Apple's classes behaviors/APIs.
 
+## TextStoringMonitor
+
+Standard interface for systems that need to observe and react to changes in a `TextStoring` instance.
+
+## LazyTextStoringMonitor
+
+A concrete `TextStoringMonitor` class that implements progressive, on-demand access to a wrapped `TextStoringMonitor`. This makes it easy to add lazy semantics on top of an existing `TextStoringMonitor`, which can be very helpful for handling large documents.
+
+## CompositeTextStoringMonitor
+
+An easy way to group together a collection of `TextStoringMonitor` instances and tread them as a single unit.
+
 ### Suggestions or Feedback
 
 We'd love to hear from you! Get in touch via [twitter](https://twitter.com/chimehq), an issue, or a pull request.
