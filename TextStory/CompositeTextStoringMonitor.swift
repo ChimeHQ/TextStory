@@ -4,7 +4,7 @@ public struct CompositeTextStoringMonitor {
     public var monitors: [TextStoringMonitor]
     private var queue: DispatchQueue
 
-    init(monitors: [TextStoringMonitor], queue: DispatchQueue = DispatchQueue.main) {
+    public init(monitors: [TextStoringMonitor], queue: DispatchQueue = DispatchQueue.main) {
         self.monitors = monitors
         self.queue = queue
     }
