@@ -33,7 +33,7 @@ extension LazyTextStoringMonitor {
     private func adjustMaximum(with mutation: TextMutation, in storage: TextStoring) {
         precondition(maximumProcessedLocation <= mutation.limit)
 
-        maximumProcessedLocation += maximumProcessedLocation
+        maximumProcessedLocation += mutation.delta
 
         precondition(maximumProcessedLocation >= 0)
         precondition(maximumProcessedLocation <= storage.length)
@@ -69,7 +69,8 @@ extension LazyTextStoringMonitor {
         // revealed so far to the underlying monitor.
         let mutation = TextMutation(string: substring, range: insertionRange, limit: start)
 
-        processMutation(mutation, in: storage)
+        storingMonitor.processMutation(mutation, in: storage)
+        adjustMaximum(with: mutation, in: storage)
     }
 
     public func ensureAllTextProcessed(for storage: TextStoring) {
