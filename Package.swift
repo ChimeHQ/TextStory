@@ -10,7 +10,7 @@ let package = Package(
         .library(name: "TextStoryTesting", targets: ["TextStoryTesting"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/ChimeHQ/Rearrange.git", from: "1.1.2")
+        .package(url: "https://github.com/ChimeHQ/Rearrange.git", from: "1.1.6")
     ],
     targets: [
         // If you can figure out how to improve this situation, you get a cookie.
