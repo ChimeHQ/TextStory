@@ -60,9 +60,20 @@ extension LazyTextStoringMonitor {
         precondition(maximumProcessedLocation <= storage.length)
     }
 
+    public func processNextDeltaIfNeeded(in storage: TextStoring) -> Bool {
+        if maximumProcessedLocation >= storage.length {
+            return false
+        }
+
+        // by including the max, we'll ultimately us the minimumDelta
+        ensureTextProcessed(including: maximumProcessedLocation, in: storage)
+
+        return true
+    }
+
     public func ensureTextProcessed(including location: Int, in storage: TextStoring) {
         precondition(location <= storage.length)
-        
+
         let actualLoc = min(location + 1, storage.length)
 
         ensureTextProcessed(upTo: actualLoc, in: storage)
