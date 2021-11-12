@@ -1,5 +1,4 @@
 [![Github CI](https://github.com/ChimeHQ/TextStory/workflows/CI/badge.svg)](https://github.com/ChimeHQ/TextStory/actions)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage)
 
 # TextStory
 
@@ -65,6 +64,10 @@ A concrete `TextStoringMonitor` class that implements progressive, on-demand acc
 ## CompositeTextStoringMonitor
 
 An easy way to group together a collection of `TextStoringMonitor` instances and tread them as a single unit.
+
+## TextMutationEventRouter
+
+This class can accept and route `TSYTextStorage` delegate callbacks to multiple `TextStoringMonitor` instances. This is super handy for faning-out these calls.
 
 ### Suggestions or Feedback
 

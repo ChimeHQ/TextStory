@@ -238,5 +238,4 @@ class BufferingTextStorageTests: XCTestCase {
         XCTAssertEqual(storage.string, "oh well, hello")
         XCTAssertEqual(storage.transformBaseRange(NSMakeRange(0, 5)), NSMakeRange(9, 5))
     }
-
 }
