@@ -5,7 +5,6 @@ public class LazyTextStoringMonitor {
     public private(set) var maximumProcessedLocation: Int
     public var minimumDelta: UInt = 1024
     public var ignoreUnprocessedMutations = false
-    private var loadingAsynchronously = false
 
     public init(storingMonitor: TextStoringMonitor) {
         self.storingMonitor = storingMonitor
@@ -116,30 +115,5 @@ extension LazyTextStoringMonitor {
 
     public func ensureAllTextProcessed(for storage: TextStoring) {
         ensureTextProcessed(upTo: storage.length, in: storage)
-    }
-}
-
-extension LazyTextStoringMonitor {
-    public func loadAsynchronously(in storage: TextStoring, on queue: OperationQueue = .main) {
-        self.loadingAsynchronously = true
-
-        queue.addOperation {
-            guard self.loadingAsynchronously else { return }
-
-            guard self.processNextDeltaIfNeeded(in: storage) else {
-                self.loadingAsynchronously = false
-                return
-            }
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-                self.loadAsynchronously(in: storage)
-            })
-        }
-    }
-
-    public func stopAsynchronousLoading(on queue: OperationQueue = .main) {
-        queue.addOperation {
-            self.loadingAsynchronously = false
-        }
     }
 }
