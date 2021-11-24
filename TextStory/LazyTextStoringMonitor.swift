@@ -5,6 +5,7 @@ public class LazyTextStoringMonitor {
     public private(set) var maximumProcessedLocation: Int
     public var minimumDelta: UInt = 1024
     public var ignoreUnprocessedMutations = false
+    private var activeMutation: TextMutation?
 
     public init(storingMonitor: TextStoringMonitor) {
         self.storingMonitor = storingMonitor
@@ -28,7 +29,10 @@ extension LazyTextStoringMonitor: TextStoringMonitor {
 
         ensureTextProcessed(upTo: mutation.range.max, in: storage)
 
+        precondition(activeMutation == nil)
         let effectiveMutation = limitedMutation(from: mutation)
+
+        self.activeMutation = effectiveMutation
 
         storingMonitor.willApplyMutation(effectiveMutation, to: storage)
     }
@@ -38,23 +42,23 @@ extension LazyTextStoringMonitor: TextStoringMonitor {
             return
         }
 
-        let effectiveMutation = limitedMutation(from: mutation)
+        guard let effectiveMutation = activeMutation else {
+            fatalError("must have an active mutation")
+        }
 
         storingMonitor.didApplyMutation(effectiveMutation, to: storage, completionHandler: completionHandler)
+        adjustMaximum(with: mutation, in: storage)
     }
 
     public func didCompleteChangeProcessing(of mutation: TextMutation?, in storage: TextStoring) {
         if let mutation = mutation, needsToProcessMutation(in: mutation.range) == false {
+            self.activeMutation = nil
             return
         }
 
-        let effectiveMutation = mutation.map { limitedMutation(from: $0) }
+        storingMonitor.didCompleteChangeProcessing(of: activeMutation, in: storage)
 
-        storingMonitor.didCompleteChangeProcessing(of: effectiveMutation, in: storage)
-
-        if let mutation = mutation {
-            adjustMaximum(with: mutation, in: storage)
-        }
+        self.activeMutation = nil
     }
 }
 
@@ -125,8 +129,12 @@ extension LazyTextStoringMonitor {
         // revealed so far to the underlying monitor.
         let mutation = TextMutation(string: substring, range: insertionRange, limit: start)
 
-        storingMonitor.processMutation(mutation, in: storage)
+        // We also need to be sure to deliver the changes *and* adjust the maximum
+        // at the same points we would normally
+        storingMonitor.willApplyMutation(mutation, to: storage)
+        storingMonitor.didApplyMutation(mutation, to: storage, completionHandler: {})
         adjustMaximum(with: mutation, in: storage)
+        storingMonitor.didCompleteChangeProcessing(of: mutation, in: storage)
     }
 
     public func ensureAllTextProcessed(for storage: TextStoring) {

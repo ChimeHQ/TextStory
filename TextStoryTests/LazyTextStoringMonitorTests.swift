@@ -146,4 +146,17 @@ final class LazyTextStoringMontiorTests: XCTestCase {
         XCTAssertTrue(lazyMonitor.needsToProcessMutation(in: NSRange(3..<3)))
         XCTAssertFalse(lazyMonitor.needsToProcessMutation(in: NSRange(4..<4)))
     }
+
+    func testDeleteAfterFullyProcessed() {
+        let mockMonitor = MockTextStoringMonitor()
+        let storage = NSTextStorage(string: "abcdefghi")
+
+        let lazyMonitor = LazyTextStoringMonitor(storingMonitor: mockMonitor)
+
+        lazyMonitor.ensureAllTextProcessed(for: storage)
+
+        let mutation = TextMutation(string: "", range: NSRange(3..<6), limit: 9)
+
+        lazyMonitor.applyMutation(mutation, to: storage)
+    }
 }
