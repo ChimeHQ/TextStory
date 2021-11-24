@@ -28,7 +28,9 @@ extension LazyTextStoringMonitor: TextStoringMonitor {
 
         ensureTextProcessed(upTo: mutation.range.max, in: storage)
 
-        storingMonitor.willApplyMutation(mutation, to: storage)
+        let effectiveMutation = limitedMutation(from: mutation)
+
+        storingMonitor.willApplyMutation(effectiveMutation, to: storage)
     }
 
     public func didApplyMutation(_ mutation: TextMutation, to storage: TextStoring, completionHandler: @escaping () -> Void) {
@@ -36,9 +38,9 @@ extension LazyTextStoringMonitor: TextStoringMonitor {
             return
         }
 
-        adjustMaximum(with: mutation, in: storage)
+        let effectiveMutation = limitedMutation(from: mutation)
 
-        storingMonitor.didApplyMutation(mutation, to: storage, completionHandler: completionHandler)
+        storingMonitor.didApplyMutation(effectiveMutation, to: storage, completionHandler: completionHandler)
     }
 
     public func didCompleteChangeProcessing(of mutation: TextMutation?, in storage: TextStoring) {
@@ -46,11 +48,25 @@ extension LazyTextStoringMonitor: TextStoringMonitor {
             return
         }
 
-        storingMonitor.didCompleteChangeProcessing(of: mutation, in: storage)
+        let effectiveMutation = mutation.map { limitedMutation(from: $0) }
+
+        storingMonitor.didCompleteChangeProcessing(of: effectiveMutation, in: storage)
+
+        if let mutation = mutation {
+            adjustMaximum(with: mutation, in: storage)
+        }
     }
 }
 
 extension LazyTextStoringMonitor {
+    private func limitedMutation(from mutation: TextMutation) -> TextMutation {
+        let limit = min(mutation.limit, maximumProcessedLocation)
+
+        return TextMutation(string: mutation.string,
+                            range: mutation.range,
+                            limit: limit)
+    }
+
     private func adjustMaximum(with mutation: TextMutation, in storage: TextStoring) {
         precondition(maximumProcessedLocation <= mutation.limit)
 
