@@ -98,6 +98,10 @@
 
     assert(self.hasProcessedEdit == NO);
     self.hasProcessedEdit = YES;
+
+    if ([self.storageDelegate respondsToSelector:@selector(textStorageWillCompleteProcessingEdit:)]) {
+        [self.storageDelegate textStorageWillCompleteProcessingEdit:self];
+    }
 }
 
 - (void)endEditing {
@@ -122,8 +126,8 @@
 
     self.hasProcessedEdit = NO;
 
-    if ([self.storageDelegate respondsToSelector:@selector(textStorageProcessEditingComplete:)]) {
-        [self.storageDelegate textStorageProcessEditingComplete:self];
+    if ([self.storageDelegate respondsToSelector:@selector(textStorageDidCompleteProcessingEdit:)]) {
+        [self.storageDelegate textStorageDidCompleteProcessingEdit:self];
     }
 }
 

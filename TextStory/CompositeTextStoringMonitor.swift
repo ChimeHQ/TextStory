@@ -15,19 +15,12 @@ extension CompositeTextStoringMonitor: TextStoringMonitor {
         monitors.forEach({ $0.willApplyMutation(mutation, to: storage) })
     }
 
-    public func didApplyMutation(_ mutation: TextMutation, to storage: TextStoring, completionHandler: @escaping () -> Void) {
-        let group = DispatchGroup()
+    public func didApplyMutation(_ mutation: TextMutation, to storage: TextStoring) {
+        monitors.forEach({ $0.didApplyMutation(mutation, to: storage) })
+    }
 
-        for monitor in monitors {
-            group.enter()
-            monitor.didApplyMutation(mutation, to: storage) {
-                group.leave()
-            }
-        }
-
-        group.notify(queue: queue, execute: {
-            completionHandler()
-        })
+    public func willCompleteChangeProcessing(of mutation: TextMutation?, in storage: TextStoring) {
+        monitors.forEach({ $0.willCompleteChangeProcessing(of: mutation, in: storage) })
     }
 
     public func didCompleteChangeProcessing(of mutation: TextMutation?, in storage: TextStoring) {

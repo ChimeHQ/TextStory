@@ -19,9 +19,14 @@ final class TextEventMutationRouterTests: XCTestCase {
         }
 
         let didApplyExpectation = XCTestExpectation(description: "didApply")
-        mockMonitor.didApplyBlock = { (_, _, block) in
+        mockMonitor.didApplyBlock = { (_, _) in
             didApplyExpectation.fulfill()
-            block()
+        }
+
+        let willCompleteExpectation = XCTestExpectation(description: "willComplete")
+        mockMonitor.willCompleteChangeBlock = { (finishedMutation, _) in
+            XCTAssertEqual(finishedMutation, mutation)
+            willCompleteExpectation.fulfill()
         }
 
         let didCompleteExpectation = XCTestExpectation(description: "didComplete")
@@ -32,7 +37,7 @@ final class TextEventMutationRouterTests: XCTestCase {
 
         storage.applyMutation(mutation)
 
-        wait(for: [willApplyExpectation, didApplyExpectation, didCompleteExpectation],
+        wait(for: [willApplyExpectation, didApplyExpectation, willCompleteExpectation, didCompleteExpectation],
                 timeout: 2.0,
                 enforceOrder: true)
     }

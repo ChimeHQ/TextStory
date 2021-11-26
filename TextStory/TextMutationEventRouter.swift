@@ -55,50 +55,20 @@ extension TextMutationEventRouter: TSYTextStorageDelegate {
 
         precondition(mutation == pendingMutation, "Pre and post mutations must be the same")
 
-        notifyDidApplyMutationMonitors(mutation, with: textStorage)
-        notifyWillCompleteChangeProcessing(of: mutation, for: textStorage)
+        storingMonitors.forEach({ $0.didApplyMutation(mutation, to: textStorage) })
     }
 
-    public func textStorageProcessEditingComplete(_ textStorage: TSYTextStorage) {
+    public func textStorageWillCompleteProcessingEdit(_ textStorage: TSYTextStorage) {
         preconditionOnMainQueue()
 
-        if pendingMutation == nil {
-            // When there is no pending mutation, this method won't yet have been invoked. Do
-            // that here so clients have a consistent experience
-            notifyWillCompleteChangeProcessing(of: pendingMutation, for: textStorage)
-        }
+        storingMonitors.forEach({ $0.willCompleteChangeProcessing(of: pendingMutation, in: textStorage) })
+    }
 
-        let mutation = pendingMutation
+    public func textStorageDidCompleteProcessingEdit(_ textStorage: TSYTextStorage) {
+        preconditionOnMainQueue()
 
-        notifyDidCompleteChangeProcessing(of: mutation, for: textStorage)
+        storingMonitors.forEach({ $0.didCompleteChangeProcessing(of: pendingMutation, in: textStorage) })
 
         pendingMutation = nil
-    }
-}
-
-extension TextMutationEventRouter {
-    private func notifyDidApplyMutationMonitors(_ mutation: TextMutation, with storage: TextStoring) {
-        let group = DispatchGroup()
-
-        for monitor in storingMonitors {
-            group.enter()
-            monitor.didApplyMutation(mutation, to: storage) {
-                group.leave()
-            }
-        }
-
-        group.notify(queue: DispatchQueue.main, execute: {
-            self.storingMonitorsCompletionBlock?(storage)
-        })
-    }
-
-    private func notifyWillCompleteChangeProcessing(of mutation: TextMutation?, for storage: TextStoring) {
-        // when/if TextStoringMonitor can support this, here is where it would go
-    }
-
-    private func notifyDidCompleteChangeProcessing(of mutation: TextMutation?, for storage: TextStoring) {
-        for monitor in storingMonitors {
-            monitor.didCompleteChangeProcessing(of: mutation, in: storage)
-        }
     }
 }

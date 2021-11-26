@@ -33,7 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)textStorage:(TSYTextStorage *)textStorage willReplaceCharactersInRange:(NSRange)range withString:(NSString *)string;
 - (void)textStorage:(TSYTextStorage *)textStorage didReplaceCharactersInRange:(NSRange)range withString:(NSString *)string;
-- (void)textStorageProcessEditingComplete:(TSYTextStorage *)textStorage;
+- (void)textStorageWillCompleteProcessingEdit:(TSYTextStorage *)textStorage;
+- (void)textStorageDidCompleteProcessingEdit:(TSYTextStorage *)textStorage;
 
 #if TARGET_OS_OSX
 - (NSRange)textStorage:(TSYTextStorage *)textStorage doubleClickRangeForLocation:(NSUInteger)location;

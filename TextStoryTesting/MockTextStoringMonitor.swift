@@ -3,12 +3,14 @@ import TextStory
 
 public class MockTextStoringMonitor: TextStoringMonitor {
     public var willApplyBlock: ((TextMutation, TextStoring) -> Void)?
-    public var didApplyBlock: ((TextMutation, TextStoring, @escaping () -> Void) -> Void)
+    public var didApplyBlock: ((TextMutation, TextStoring) -> Void)?
     public var didCompleteChangeBlock: ((TextMutation?, TextStoring) -> Void)?
+    public var willCompleteChangeBlock: ((TextMutation?, TextStoring) -> Void)?
 
     public init() {
         self.willApplyBlock = nil
-        self.didApplyBlock = { (_, _, handler) in handler() }
+        self.didApplyBlock = nil
+        self.willCompleteChangeBlock = nil
         self.didCompleteChangeBlock = nil
     }
 
@@ -16,8 +18,12 @@ public class MockTextStoringMonitor: TextStoringMonitor {
         willApplyBlock?(mutation, buffer)
     }
 
-    public func didApplyMutation(_ mutation: TextMutation, to buffer: TextStoring, completionHandler: @escaping () -> Void) {
-        didApplyBlock(mutation, buffer, completionHandler)
+    public func didApplyMutation(_ mutation: TextMutation, to buffer: TextStoring) {
+        didApplyBlock?(mutation, buffer)
+    }
+
+    public func willCompleteChangeProcessing(of mutation: TextMutation?, in storage: TextStoring) {
+        willCompleteChangeBlock?(mutation, storage)
     }
 
     public func didCompleteChangeProcessing(of mutation: TextMutation?, in storage: TextStoring) {

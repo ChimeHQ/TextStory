@@ -37,7 +37,7 @@ extension LazyTextStoringMonitor: TextStoringMonitor {
         storingMonitor.willApplyMutation(effectiveMutation, to: storage)
     }
 
-    public func didApplyMutation(_ mutation: TextMutation, to storage: TextStoring, completionHandler: @escaping () -> Void) {
+    public func didApplyMutation(_ mutation: TextMutation, to storage: TextStoring) {
         if needsToProcessMutation(in: mutation.range) == false {
             return
         }
@@ -46,8 +46,16 @@ extension LazyTextStoringMonitor: TextStoringMonitor {
             fatalError("must have an active mutation")
         }
 
-        storingMonitor.didApplyMutation(effectiveMutation, to: storage, completionHandler: completionHandler)
+        storingMonitor.didApplyMutation(effectiveMutation, to: storage)
         adjustMaximum(with: mutation, in: storage)
+    }
+
+    public func willCompleteChangeProcessing(of mutation: TextMutation?, in storage: TextStoring) {
+        if let mutation = mutation, needsToProcessMutation(in: mutation.range) == false {
+            return
+        }
+
+        storingMonitor.didCompleteChangeProcessing(of: activeMutation, in: storage)
     }
 
     public func didCompleteChangeProcessing(of mutation: TextMutation?, in storage: TextStoring) {
@@ -132,8 +140,9 @@ extension LazyTextStoringMonitor {
         // We also need to be sure to deliver the changes *and* adjust the maximum
         // at the same points we would normally
         storingMonitor.willApplyMutation(mutation, to: storage)
-        storingMonitor.didApplyMutation(mutation, to: storage, completionHandler: {})
+        storingMonitor.didApplyMutation(mutation, to: storage)
         adjustMaximum(with: mutation, in: storage)
+        storingMonitor.willCompleteChangeProcessing(of: mutation, in: storage)
         storingMonitor.didCompleteChangeProcessing(of: mutation, in: storage)
     }
 

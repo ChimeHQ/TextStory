@@ -6,7 +6,8 @@ extension TextStoringMonitor {
     func applyMutation(_ mutation: TextMutation, to storage: TextStoring) {
         willApplyMutation(mutation, to: storage)
         storage.applyMutation(mutation)
-        didApplyMutation(mutation, to: storage, completionHandler: {})
+        didApplyMutation(mutation, to: storage)
+        willCompleteChangeProcessing(of: mutation, in: storage)
         didCompleteChangeProcessing(of: mutation, in: storage)
     }
 
@@ -53,12 +54,10 @@ final class LazyTextStoringMontiorTests: XCTestCase {
 
         let didApplyExpectation = XCTestExpectation(description: "didApply")
         didApplyExpectation.expectedFulfillmentCount = mutations.count
-        mockMonitor.didApplyBlock = { (mutation, _, completionHandler) in
+        mockMonitor.didApplyBlock = { (mutation, _) in
             XCTAssertEqual(mutation, appliedMutations.last)
 
             didApplyExpectation.fulfill()
-
-            completionHandler()
         }
 
         lazyMonitor.applyMutations(mutations, to: storage)
