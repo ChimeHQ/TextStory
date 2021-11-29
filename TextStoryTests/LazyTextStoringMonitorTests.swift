@@ -2,22 +2,6 @@ import XCTest
 import TextStory
 import TextStoryTesting
 
-extension TextStoringMonitor {
-    func applyMutation(_ mutation: TextMutation, to storage: TextStoring) {
-        willApplyMutation(mutation, to: storage)
-        storage.applyMutation(mutation)
-        didApplyMutation(mutation, to: storage)
-        willCompleteChangeProcessing(of: mutation, in: storage)
-        didCompleteChangeProcessing(of: mutation, in: storage)
-    }
-
-    func applyMutations(_ mutations: [TextMutation], to storage: TextStoring) {
-        for mutation in mutations {
-            applyMutation(mutation, to: storage)
-        }
-    }
-}
-
 final class LazyTextStoringMontiorTests: XCTestCase {
     func testEnsuresProcessingForMutation() {
         let mockMonitor = MockTextStoringMonitor()
