@@ -1,11 +1,3 @@
-//
-//  TextMutation.swift
-//  TextBase
-//
-//  Created by Matt Massicotte on 2019-12-16.
-//  Copyright © 2019 Chime Systems Inc. All rights reserved.
-//
-
 import Foundation
 import Rearrange
 
@@ -21,7 +13,7 @@ public struct TextMutation {
     }
 }
 
-extension TextMutation: Equatable {
+extension TextMutation: Hashable {
 }
 
 public extension TextMutation {
