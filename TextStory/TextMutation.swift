@@ -11,6 +11,16 @@ public struct TextMutation {
         self.range = range
         self.limit = limit
     }
+
+    /// Sets the range property's length to zero
+    public init(insert string: String, at location: Int, limit: Int) {
+        self.init(string: string, range: NSRange(location: location, length: 0), limit: limit)
+    }
+
+    /// Settings the string property to a blank string
+    public init(delete range: NSRange, limit: Int) {
+        self.init(string: "", range: range, limit: limit)
+    }
 }
 
 extension TextMutation: Hashable {
