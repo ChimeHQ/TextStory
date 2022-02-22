@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "TextStory",
-    platforms: [.macOS(.v10_12), .iOS(.v10)],
+    platforms: [.macOS(.v10_12), .iOS(.v10), .tvOS(.v10)],
     products: [
         .library(name: "TextStory", targets: ["TextStory"]),
         .library(name: "TextStoryTesting", targets: ["TextStoryTesting"]),

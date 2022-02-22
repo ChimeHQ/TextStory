@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol TextStoring {
+public protocol TextStoring: AnyObject {
     /// Returns the UTF-16 length of the receiver
     var length: Int { get }
 
