@@ -8,12 +8,9 @@
 
 import Foundation
 import Rearrange
-
-#if SPM_BUILD
 import Internal
 public typealias TSYTextStorage = Internal.TSYTextStorage
 public typealias TSYTextStorageDelegate = Internal.TSYTextStorageDelegate
-#endif
 
 public class BufferingTextStorage: TSYTextStorage {
     private var changeQueue: [TextMutation] = []
