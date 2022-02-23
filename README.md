@@ -14,12 +14,6 @@ dependencies: [
 ]
 ```
 
-Carthage:
-
-```
-github "ChimeHQ/TextStory"
-```
-
 ## TSYTextStorage
 
 A minimal `NSTextStorage` subclass that provides hooks for much more powerful delegate behavior. Great for separating logic/behavior from your storage object. Because it is built to wrap another `NSTextStorage` instance, it is more easily composable.
