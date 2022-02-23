@@ -10,16 +10,9 @@ on:
 
 jobs:
   test:
-    name: Test on destination ${{ matrix.destination }}
+    name: Test with Swift
     runs-on: macOS-latest
-    strategy:
-      matrix:
-        destination: ["platform=macOS", "platform=iOS Simulator,name=iPhone 8"]
     steps:
-      - uses: actions/checkout@v1
-      - name: install dependencies
-        run: carthage bootstrap
-      - name: update submodules
-        run: git submodule update --init
-      - name: xcodebuild test ${{ matrix.destination }}
-        run: set -o pipefail && xcodebuild test -scheme TextStory -destination "${{ matrix.destination }}" | xcpretty
+      - uses: actions/checkout@v2
+      - name: swift test
+        run: swift test
