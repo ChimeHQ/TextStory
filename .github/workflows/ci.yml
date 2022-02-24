@@ -10,9 +10,16 @@ on:
 
 jobs:
   test:
-    name: Test with Swift
+    name: Test
     runs-on: macOS-latest
+    strategy:
+      matrix:
+        destination:
+          - "platform=macOS"
+          - "platform=iOS Simulator,name=iPhone 11"
+          - "platform=tvOS Simulator,name=Apple TV"
+    
     steps:
       - uses: actions/checkout@v2
-      - name: swift test
-        run: swift test
+      - name: Test platform ${{ matrix.destination }}
+        run: set -o pipefail && xcodebuild -scheme Rearrange -destination "${{ matrix.destination }}" test | xcpretty
