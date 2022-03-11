@@ -23,8 +23,41 @@ public extension TextStoring {
         }
     }
 
+    func findNextOccurrenceOfCharacter(in set: CharacterSet, from location: Int) -> Int? {
+        var checkLoc = location
+
+        while checkLoc < length {
+            let range = NSRange(location: checkLoc, length: 1)
+
+            guard let value = substring(from: range) else {
+                fatalError()
+            }
+
+            if value.unicodeScalars.allSatisfy({ set.contains($0) }) {
+                return checkLoc
+            }
+
+            checkLoc += 1
+        }
+
+        return nil
+    }
+
     func findStartOfLine(containing location: Int) -> Int {
         return findPreceedingOccurrenceOfCharacter(in: CharacterSet.newlines, from: location) ?? 0
+    }
+
+    func findEndOfLine(containing location: Int) -> Int {
+        let location = findNextOccurrenceOfCharacter(in: CharacterSet.newlines, from: location) ?? length
+
+        return min(location + 1, length)
+    }
+
+    func lineRange(containing location: Int) -> NSRange {
+        let start = findStartOfLine(containing: location)
+        let end = findEndOfLine(containing: location)
+
+        return NSRange(start..<end)
     }
 
     func leadingRange(in range: NSRange, within set: CharacterSet) -> NSRange? {
