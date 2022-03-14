@@ -51,4 +51,12 @@ final class TextStoringRangeTests: XCTestCase {
 
         XCTAssertEqual(storage.leadingWhitespaceRange(in: NSMakeRange(11, 9)), NSMakeRange(11, 4))
     }
+
+    func testTrailingAlphas() {
+        let string = " some stuff"
+        let storage = NSTextStorage(string: string)
+        let range = storage.trailingRange(in: NSRange(0..<8), within: CharacterSet.alphanumerics)
+
+        XCTAssertEqual(range, NSRange(6..<8))
+    }
 }
