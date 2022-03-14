@@ -101,16 +101,16 @@ public extension TextStoring {
 
 public extension TextStoring {
     func leadingWhitespaceRange(in range: NSRange) -> NSRange? {
-        return leadingRange(in: range, within: .whitespaces)
+        return leadingRange(in: range, within: .whitespacesAndNewlines)
     }
 
     func trailingWhitespaceRange(in range: NSRange) -> NSRange? {
-        return trailingRange(in: range, within: .whitespaces)
+        return trailingRange(in: range, within: .whitespacesAndNewlines)
     }
 
     func leadingWhitespaceRange(containing location: Int) -> NSRange? {
         let lineStartLocation = findStartOfLine(containing: location)
 
-        return leadingRange(in: NSRange(lineStartLocation..<location), within: .whitespaces)
+        return leadingRange(in: NSRange(lineStartLocation..<location), within: .whitespacesAndNewlines)
     }
 }
