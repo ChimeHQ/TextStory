@@ -1,2 +1,7 @@
-Carthage/
-.build
+.DS_Store
+/.build
+/Carthage
+/Packages
+xcuserdata/
+DerivedData/
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata

@@ -1,13 +1,8 @@
 import XCTest
 import TextStory
 import TextStoryTesting
-#if os(macOS)
-import class AppKit.NSTextView
-#else
-#endif
 
 class TextViewTests: XCTestCase {
-#if os(macOS)
     func testProgrammaticModificationSupportsUndo() {
         let textView = UndoSettingTextView()
         textView.settableUndoManager = UndoManager()
@@ -22,5 +17,4 @@ class TextViewTests: XCTestCase {
 
         XCTAssertEqual(textView.string, "")
     }
-#endif
 }
