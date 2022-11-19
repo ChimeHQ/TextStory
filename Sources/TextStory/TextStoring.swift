@@ -38,7 +38,7 @@ public extension TextStoring {
 
     var string: String {
         guard let str = substring(from: fullRange) else {
-            fatalError("unablet to produce a substring using the full range")
+            fatalError("Unable to produce a substring using the full range")
         }
 
         return str
