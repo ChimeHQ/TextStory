@@ -1,6 +1,11 @@
 import Foundation
 
 public extension TextStoring {
+	@available(*, deprecated, message: "Please use the correctly-spelled findPrecedingOccurrenceOfCharacter")
+	func findPreceedingOccurrenceOfCharacter(in set: CharacterSet, from location: Int) -> Int? {
+		return findPrecedingOccurrenceOfCharacter(in: set, from: location)
+	}
+
     func findPrecedingOccurrenceOfCharacter(in set: CharacterSet, from location: Int) -> Int? {
         var checkLoc = min(location - 1, length - 1)
 
