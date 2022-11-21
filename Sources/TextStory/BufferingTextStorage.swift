@@ -114,7 +114,7 @@ extension BufferingTextStorage {
         var transformedRange = range
 
         // transforming a range from the base involves
-        // inversing all of the queued changes, in reverse
+        // inverting all of the queued changes, in reverse
         // order
         for change in changeQueue.reversed() {
             let inverseDelta = change.inverseDelta

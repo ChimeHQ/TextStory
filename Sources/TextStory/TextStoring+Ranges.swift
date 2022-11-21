@@ -1,7 +1,7 @@
 import Foundation
 
 public extension TextStoring {
-    func findPreceedingOccurrenceOfCharacter(in set: CharacterSet, from location: Int) -> Int? {
+    func findPrecedingOccurrenceOfCharacter(in set: CharacterSet, from location: Int) -> Int? {
         var checkLoc = min(location - 1, length - 1)
 
         while true {
@@ -44,7 +44,7 @@ public extension TextStoring {
     }
 
     func findStartOfLine(containing location: Int) -> Int {
-        return findPreceedingOccurrenceOfCharacter(in: CharacterSet.newlines, from: location) ?? 0
+        return findPrecedingOccurrenceOfCharacter(in: CharacterSet.newlines, from: location) ?? 0
     }
 
     func findEndOfLine(containing location: Int) -> Int {
