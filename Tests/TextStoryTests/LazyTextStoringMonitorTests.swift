@@ -121,12 +121,21 @@ final class LazyTextStoringMontiorTests: XCTestCase {
 
         lazyMonitor.ensureTextProcessed(upTo: 3, in: storage)
 
-        lazyMonitor.ignoreUnprocessedMutations = true
-
         XCTAssertTrue(lazyMonitor.needsToProcessMutation(in: NSRange(0..<0)))
         XCTAssertTrue(lazyMonitor.needsToProcessMutation(in: NSRange(0..<1)))
         XCTAssertTrue(lazyMonitor.needsToProcessMutation(in: NSRange(0..<4)))
+		XCTAssertTrue(lazyMonitor.needsToProcessMutation(in: NSRange(2..<4)))
         XCTAssertTrue(lazyMonitor.needsToProcessMutation(in: NSRange(3..<3)))
+		XCTAssertTrue(lazyMonitor.needsToProcessMutation(in: NSRange(4..<4)))
+
+		lazyMonitor.ignoreUnprocessedMutations = true
+
+		XCTAssertTrue(lazyMonitor.needsToProcessMutation(in: NSRange(0..<0)))
+		XCTAssertTrue(lazyMonitor.needsToProcessMutation(in: NSRange(0..<1)))
+		XCTAssertTrue(lazyMonitor.needsToProcessMutation(in: NSRange(0..<4)))
+		XCTAssertTrue(lazyMonitor.needsToProcessMutation(in: NSRange(2..<4)))
+		XCTAssertTrue(lazyMonitor.needsToProcessMutation(in: NSRange(3..<3)))
+
         XCTAssertFalse(lazyMonitor.needsToProcessMutation(in: NSRange(4..<4)))
     }
 
