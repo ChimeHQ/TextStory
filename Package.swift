@@ -1,6 +1,10 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.5
 
 import PackageDescription
+
+let settings: [SwiftSetting] = [
+//    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"])
+]
 
 let package = Package(
     name: "TextStory",
@@ -14,8 +18,8 @@ let package = Package(
     ],
     targets: [
         .target(name: "Internal", publicHeadersPath: "."),
-        .target(name: "TextStory", dependencies: ["Internal", "Rearrange"]),
-        .target(name: "TextStoryTesting", dependencies: ["TextStory"]),
-        .testTarget(name: "TextStoryTests", dependencies: ["TextStory", "TextStoryTesting"]),
+        .target(name: "TextStory", dependencies: ["Internal", "Rearrange"], swiftSettings: settings),
+        .target(name: "TextStoryTesting", dependencies: ["TextStory"], swiftSettings: settings),
+        .testTarget(name: "TextStoryTests", dependencies: ["TextStory", "TextStoryTesting"], swiftSettings: settings),
     ]
 )

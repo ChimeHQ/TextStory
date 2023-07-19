@@ -23,8 +23,8 @@ public struct TextMutation {
     }
 }
 
-extension TextMutation: Hashable {
-}
+extension TextMutation: Hashable {}
+extension TextMutation: Sendable {}
 
 public extension TextMutation {
     private var stringLength: Int {
