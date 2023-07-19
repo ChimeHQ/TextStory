@@ -13,17 +13,17 @@ final class TextViewTests: XCTestCase {
 
         storage.applyMutation(mutation)
 
-        #if os(macOS)
+        #if canImport(AppKit)
         XCTAssertEqual(textView.string, "hello")
-        #elseif os(iOS)
+        #elseif canImport(UIKit)
         XCTAssertEqual(textView.text, "hello")
         #endif
 
         textView.undoManager!.undo()
 
-        #if os(macOS)
+        #if canImport(AppKit)
         XCTAssertEqual(textView.string, "")
-        #elseif os(iOS)
+        #elseif canImport(UIKit)
         XCTAssertEqual(textView.text, "")
         #endif
     }

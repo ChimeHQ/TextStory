@@ -38,7 +38,7 @@ extension UndoingTextStorage: TextStoring {
     }
 }
 
-#if os(macOS)
+#if canImport(AppKit)
 import AppKit
 
 extension UndoingTextStorage {
@@ -54,9 +54,7 @@ extension NSTextView {
         UndoingTextStorage(view: self)
     }
 }
-#endif
-
-#if os(iOS)
+#elseif canImport(UIKit)
 import UIKit
 
 extension UndoingTextStorage {
