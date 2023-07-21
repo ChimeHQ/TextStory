@@ -1,5 +1,5 @@
 #if os(macOS)
-import AppKit.NSTextView
+import AppKit
 
 open class UndoSettingTextView: NSTextView {
     public var settableUndoManager: UndoManager?
