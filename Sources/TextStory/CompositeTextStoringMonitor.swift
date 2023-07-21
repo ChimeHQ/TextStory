@@ -1,29 +1,36 @@
 import Foundation
 
+/// Fans out `TextStoringMonitor` notitications to mulitple other monitors.
 public struct CompositeTextStoringMonitor {
-    public var monitors: [TextStoringMonitor]
-    private var queue: DispatchQueue
+	public var monitors: [TextStoringMonitor]
 
-    public init(monitors: [TextStoringMonitor], queue: DispatchQueue = DispatchQueue.main) {
-        self.monitors = monitors
-        self.queue = queue
-    }
+	public init(monitors: [TextStoringMonitor]) {
+		self.monitors = monitors
+	}
 }
 
 extension CompositeTextStoringMonitor: TextStoringMonitor {
-    public func willApplyMutation(_ mutation: TextMutation, to storage: TextStoring) {
-        monitors.forEach({ $0.willApplyMutation(mutation, to: storage) })
-    }
+	public func willApplyMutation(_ mutation: TextMutation, to storage: TextStoring) {
+		for monitor in monitors {
+			monitor.willApplyMutation(mutation, to: storage)
+		}
+	}
 
-    public func didApplyMutation(_ mutation: TextMutation, to storage: TextStoring) {
-        monitors.forEach({ $0.didApplyMutation(mutation, to: storage) })
-    }
+	public func didApplyMutation(_ mutation: TextMutation, to storage: TextStoring) {
+		for monitor in monitors {
+			monitor.didApplyMutation(mutation, to: storage)
+		}
+	}
 
-    public func willCompleteChangeProcessing(of mutation: TextMutation?, in storage: TextStoring) {
-        monitors.forEach({ $0.willCompleteChangeProcessing(of: mutation, in: storage) })
-    }
+	public func willCompleteChangeProcessing(of mutation: TextMutation?, in storage: TextStoring) {
+		for monitor in monitors {
+			monitor.willCompleteChangeProcessing(of: mutation, in: storage)
+		}
+	}
 
-    public func didCompleteChangeProcessing(of mutation: TextMutation?, in storage: TextStoring) {
-        monitors.forEach({ $0.didCompleteChangeProcessing(of: mutation, in: storage) })
-    }
+	public func didCompleteChangeProcessing(of mutation: TextMutation?, in storage: TextStoring) {
+		for monitor in monitors {
+			monitor.didCompleteChangeProcessing(of: mutation, in: storage)
+		}
+	}
 }
