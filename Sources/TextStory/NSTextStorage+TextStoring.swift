@@ -8,9 +8,9 @@
 
 import Foundation
 #if os(macOS)
-import class AppKit.NSTextStorage
+import AppKit
 #else
-import class UIKit.NSTextStorage
+import UIKit
 #endif
 
 extension NSTextStorage: TextStoring {
