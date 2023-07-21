@@ -3,6 +3,7 @@ import TextStory
 import TextStoryTesting
 
 final class TextEventMutationRouterTests: XCTestCase {
+	@MainActor
     func testNormalMutationRouting() {
         let mockMonitor = MockTextStoringMonitor()
         let router = TextMutationEventRouter()

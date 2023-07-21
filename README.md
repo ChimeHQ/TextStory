@@ -49,11 +49,11 @@ func applyNextChange()
 
 A simple protocol that abstracts string storage. This is very useful for standardizing behavior across `NSTextStorage` and other objects you may use for text manipulation. Particularly handy for testing and decoupling systems from Apple's classes behaviors/APIs.
 
-## UndoingTextStorage
+In order to maintain flexiblity and match `NSTextStorage`, `TextStoring` is not actor-isolated.
 
-Integrates a view, with optional undo support to `TextStoring`.
+## TextStorageAdapter
 
-Connecting this to `NSTextView`/`UITextView` is tricky, because those are `MainActor`-isolated classes, but `NSTextStorage` is not. In order to maintain maximum flexiblity, `TextStoring` matches this. However, if you need to integrate it with a view, check out `UndoingTextStorage`. It has the appropriate constructors.
+It isn't possible to make `NSTextView`/`UITextView` conform to `TextStoring`, because they are `MainActor`-isolated classes. This adapter exists to help use a view with `TextStoring`.
 
 ## TextStoringMonitor
 

@@ -3,6 +3,7 @@ import TextStory
 import TextStoryTesting
 
 final class LazyTextStoringMontiorTests: XCTestCase {
+	@MainActor
     func testEnsuresProcessingForMutation() {
         let mockMonitor = MockTextStoringMonitor()
         let storage = NSTextStorage(string: "abcdef")
@@ -52,6 +53,7 @@ final class LazyTextStoringMontiorTests: XCTestCase {
         XCTAssertEqual(appliedMutations, visibleMutations)
     }
 
+	@MainActor
     func testMinimumDelta() {
         let mockMonitor = MockTextStoringMonitor()
         let storage = NSTextStorage(string: "abcdef")
@@ -77,6 +79,7 @@ final class LazyTextStoringMontiorTests: XCTestCase {
         XCTAssertEqual(appliedMutation, expectedMutation)
     }
 
+	@MainActor
     func testMutationBeforeLimitHasBeenReached() {
         let mockMonitor = MockTextStoringMonitor()
         let storage = NSTextStorage(string: "abcdefghi")
@@ -112,6 +115,7 @@ final class LazyTextStoringMontiorTests: XCTestCase {
         XCTAssertEqual(visibleMutations, expectedMutations)
     }
 
+	@MainActor
     func testNeedsToProcessMutation() {
         let mockMonitor = MockTextStoringMonitor()
         let storage = NSTextStorage(string: "abcdefghi")
@@ -139,6 +143,7 @@ final class LazyTextStoringMontiorTests: XCTestCase {
         XCTAssertFalse(lazyMonitor.needsToProcessMutation(in: NSRange(4..<4)))
     }
 
+	@MainActor
     func testDeleteAfterFullyProcessed() {
         let mockMonitor = MockTextStoringMonitor()
         let storage = NSTextStorage(string: "abcdefghi")

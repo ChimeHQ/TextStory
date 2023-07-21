@@ -1,6 +1,7 @@
 import Foundation
 
-public class LazyTextStoringMonitor {
+@MainActor
+public final class LazyTextStoringMonitor {
     public let storingMonitor: TextStoringMonitor
     public private(set) var maximumProcessedLocation: Int
     public var minimumDelta: UInt = 1024

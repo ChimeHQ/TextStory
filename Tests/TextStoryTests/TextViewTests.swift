@@ -2,29 +2,29 @@ import XCTest
 import TextStory
 import TextStoryTesting
 
+#if canImport(AppKit)
+extension NSTextView {
+	var text: String { string }
+}
+#endif
+
 final class TextViewTests: XCTestCase {
     @MainActor
     func testProgrammaticModificationSupportsUndo() throws {
         let textView = UndoSettingTextView()
         textView.settableUndoManager = UndoManager()
-        let storage = try XCTUnwrap(textView.undoingTextStorage)
+        let storage = TextStorageAdapter(textView: textView)
 
         let mutation = TextMutation(string: "hello", range: NSRange.zero, limit: 0)
 
         storage.applyMutation(mutation)
 
-        #if canImport(AppKit)
-        XCTAssertEqual(textView.string, "hello")
-        #elseif canImport(UIKit)
         XCTAssertEqual(textView.text, "hello")
-        #endif
+		XCTAssertEqual(textView.selectedRange, NSRange(5..<5))
 
-        textView.undoManager!.undo()
+        try XCTUnwrap(textView.undoManager).undo()
 
-        #if canImport(AppKit)
-        XCTAssertEqual(textView.string, "")
-        #elseif canImport(UIKit)
         XCTAssertEqual(textView.text, "")
-        #endif
+		XCTAssertEqual(textView.selectedRange, NSRange(0..<0))
     }
 }
