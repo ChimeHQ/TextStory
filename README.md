@@ -1,10 +1,9 @@
 [![Build Status][build status badge]][build status]
-[![License][license badge]][license]
 [![Platforms][platforms badge]][platforms]
 
 # TextStory
 
-TextStory is a small set of classes and protocols for easier work with NSTextStorage and associated systems. iOS and macOS are supported.
+TextStory is a small set of classes and protocols for easier work with NSTextStorage and associated systems.
 
 ## Integration
 
@@ -71,16 +70,17 @@ An easy way to group together a collection of `TextStoringMonitor` instances and
 
 This class can accept and route `TSYTextStorage` delegate callbacks to multiple `TextStoringMonitor` instances. This is super handy for faning-out these calls.
 
-### Suggestions or Feedback
+## Contributing and Collaboration
 
-We'd love to hear from you! Get in touch via an issue or pull request.
+I'd love to hear from you! Get in touch via an issue or pull request.
 
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+I prefer collaboration, and would love to find ways to work together if you have a similar project.
 
+I prefer indentation with tabs for improved accessibility. But, I'd rather you use the system you want and make a PR than hesitate because of whitespace.
+
+By participating in this project you agree to abide by the [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
 
 [build status]: https://github.com/ChimeHQ/TextStory/actions
 [build status badge]: https://github.com/ChimeHQ/TextStory/workflows/CI/badge.svg
-[license]: https://opensource.org/licenses/BSD-3-Clause
-[license badge]: https://img.shields.io/github/license/ChimeHQ/TextStory
 [platforms]: https://swiftpackageindex.com/ChimeHQ/TextStory
 [platforms badge]: https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FChimeHQ%2FTextStory%2Fbadge%3Ftype%3Dplatforms
