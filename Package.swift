@@ -1,10 +1,6 @@
-// swift-tools-version:5.5
+// swift-tools-version: 5.8
 
 import PackageDescription
-
-let settings: [SwiftSetting] = [
-    // .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"])
-]
 
 let package = Package(
     name: "TextStory",
@@ -15,12 +11,22 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/ChimeHQ/Rearrange", from: "1.5.0"),
-		.package(url: "https://github.com/mattmassicotte/MainOffender", from: "0.1.0"),
+        .package(url: "https://github.com/mattmassicotte/MainOffender", from: "0.1.0"),
     ],
     targets: [
         .target(name: "Internal", publicHeadersPath: "."),
-        .target(name: "TextStory", dependencies: ["Internal", "MainOffender", "Rearrange"], swiftSettings: settings),
-        .target(name: "TextStoryTesting", dependencies: ["TextStory"], swiftSettings: settings),
-        .testTarget(name: "TextStoryTests", dependencies: ["TextStory", "TextStoryTesting"], swiftSettings: settings),
+        .target(name: "TextStory", dependencies: ["Internal", "MainOffender", "Rearrange"]),
+        .target(name: "TextStoryTesting", dependencies: ["TextStory"]),
+        .testTarget(name: "TextStoryTests", dependencies: ["TextStory", "TextStoryTesting"]),
     ]
 )
+
+let swiftSettings: [SwiftSetting] = [
+    .enableExperimentalFeature("StrictConcurrency")
+]
+
+for target in package.targets {
+    var settings = target.swiftSettings ?? []
+    settings.append(contentsOf: swiftSettings)
+    target.swiftSettings = settings
+}
