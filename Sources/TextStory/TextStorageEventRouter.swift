@@ -53,11 +53,12 @@ extension TextStorageEventRouter: TSYTextStorageDelegate {
 		}
 	}
 
+#if os(macOS)
 	public func textStorage(_ textStorage: TSYTextStorage, doubleClickRangeForLocation location: UInt) -> NSRange {
 		if let provider = doubleClickWordRangeProvider {
 			return provider(Int(location))
 		}
-
+		
 		return textStorage.internalStorage.doubleClick(at: Int(location))
 	}
 
@@ -68,4 +69,5 @@ extension TextStorageEventRouter: TSYTextStorageDelegate {
 
 		return UInt(textStorage.internalStorage.nextWord(from: Int(location), forward: forward))
 	}
+#endif
 }
