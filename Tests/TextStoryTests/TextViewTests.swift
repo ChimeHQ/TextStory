@@ -13,11 +13,10 @@ final class TextViewTests: XCTestCase {
     func testProgrammaticModificationSupportsUndo() throws {
         let textView = UndoSettingTextView()
         textView.settableUndoManager = UndoManager()
-        let storage = TextStorageAdapter(textView: textView)
 
         let mutation = TextMutation(string: "hello", range: NSRange.zero, limit: 0)
 
-        storage.applyMutation(mutation)
+		textView.applyMutation(mutation)
 
         XCTAssertEqual(textView.text, "hello")
 		XCTAssertEqual(textView.selectedRange, NSRange(5..<5))

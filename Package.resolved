@@ -1,25 +1,14 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "MainOffender",
-        "repositoryURL": "https://github.com/mattmassicotte/MainOffender",
-        "state": {
-          "branch": null,
-          "revision": "343cc3797618c29b48b037b4e2beea0664e75315",
-          "version": "0.1.0"
-        }
-      },
-      {
-        "package": "Rearrange",
-        "repositoryURL": "https://github.com/ChimeHQ/Rearrange",
-        "state": {
-          "branch": null,
-          "revision": "9faf1d7f80bb49b58bea2943e711d38fa8504060",
-          "version": "1.5.0"
-        }
+  "pins" : [
+    {
+      "identity" : "rearrange",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ChimeHQ/Rearrange",
+      "state" : {
+        "revision" : "9faf1d7f80bb49b58bea2943e711d38fa8504060",
+        "version" : "1.5.0"
       }
-    ]
-  },
-  "version": 1
+    }
+  ],
+  "version" : 2
 }

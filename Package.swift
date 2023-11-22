@@ -11,11 +11,10 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/ChimeHQ/Rearrange", from: "1.5.0"),
-        .package(url: "https://github.com/mattmassicotte/MainOffender", from: "0.1.0"),
     ],
     targets: [
         .target(name: "Internal", publicHeadersPath: "."),
-        .target(name: "TextStory", dependencies: ["Internal", "MainOffender", "Rearrange"]),
+        .target(name: "TextStory", dependencies: ["Internal", "Rearrange"]),
         .target(name: "TextStoryTesting", dependencies: ["TextStory"]),
         .testTarget(name: "TextStoryTests", dependencies: ["TextStory", "TextStoryTesting"]),
     ]

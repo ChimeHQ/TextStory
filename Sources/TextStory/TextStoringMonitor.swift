@@ -1,17 +1,12 @@
 import Foundation
 
 public protocol TextStoringMonitor {
-	@MainActor
     func willApplyMutation(_ mutation: TextMutation, to storage: TextStoring)
-	@MainActor
     func didApplyMutation(_ mutation: TextMutation, to storage: TextStoring)
-	@MainActor
     func willCompleteChangeProcessing(of mutation: TextMutation?, in storage: TextStoring)
-	@MainActor
     func didCompleteChangeProcessing(of mutation: TextMutation?, in storage: TextStoring)
 }
 
-@MainActor
 public extension TextStoringMonitor {
     /// Invoke all the monitoring methods in order
     func processMutation(_ mutation: TextMutation, in storage: TextStoring) {
