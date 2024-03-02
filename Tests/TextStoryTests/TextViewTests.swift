@@ -2,7 +2,7 @@ import XCTest
 import TextStory
 import TextStoryTesting
 
-#if canImport(AppKit)
+#if canImport(AppKit) && !targetEnvironment(macCatalyst)
 extension NSTextView {
 	var text: String { string }
 }
