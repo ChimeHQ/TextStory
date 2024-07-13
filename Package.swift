@@ -15,7 +15,7 @@ let package = Package(
         .library(name: "TextStoryTesting", targets: ["TextStoryTesting"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/ChimeHQ/Rearrange", from: "1.5.0"),
+        .package(url: "https://github.com/ChimeHQ/Rearrange", from: "1.8.1"),
     ],
     targets: [
         .target(name: "Internal", publicHeadersPath: "."),
