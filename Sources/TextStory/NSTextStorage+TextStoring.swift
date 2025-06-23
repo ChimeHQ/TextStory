@@ -23,6 +23,6 @@ extension NSTextStorage: TextStoring {
             return nil
         }
 
-        return attributedSubstring(from: range).string
+        return (string as NSString).substring(with: range)
     }
 }
