@@ -1,12 +1,17 @@
-#if canImport(AppKit) && !targetEnvironment(macCatalyst)
-import AppKit
-#else
-import UIKit
-#endif
 import Foundation
 import Testing
 
 import TextStory
+
+#if canImport(AppKit) && !targetEnvironment(macCatalyst)
+import AppKit
+
+typealias StorageActions = NSTextStorageEditActions
+#else
+import UIKit
+
+typealias StorageActions = NSTextStorage.EditActions
+#endif
 
 class MockDelegate: NSObject, TSYTextStorageDelegate {
 	enum Event {
@@ -17,11 +22,11 @@ class MockDelegate: NSObject, TSYTextStorageDelegate {
 
 	var events = [Event]()
 
-	func textStorage(_ textStorage: NSTextStorage, willProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
+	func textStorage(_ textStorage: NSTextStorage, willProcessEditing editedMask: StorageActions, range editedRange: NSRange, changeInLength delta: Int) {
 
 	}
 
-	func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
+	func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: StorageActions, range editedRange: NSRange, changeInLength delta: Int) {
 
 	}
 
