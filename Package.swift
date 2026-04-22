@@ -9,6 +9,7 @@ let package = Package(
 		.macCatalyst(.v13),
 		.iOS(.v13),
 		.tvOS(.v13),
+		.visionOS(.v1),
 	],
 	products: [
 		.library(name: "TextStory", targets: ["TextStory"]),
