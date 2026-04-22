@@ -19,7 +19,11 @@ extension NSTextStorage: TextStoring {
     }
 
     public func substring(from range: NSRange) -> String? {
-        if range.max > length {
+		if range.location < 0 || range.location == NSNotFound {
+			return nil
+		}
+
+		if range.max > length {
             return nil
         }
 

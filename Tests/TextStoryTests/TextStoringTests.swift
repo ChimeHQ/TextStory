@@ -89,3 +89,13 @@ extension TextStoringTests {
         XCTAssertEqual(storage.string, "123abcdef")
     }
 }
+
+extension TextStoringTests {
+	func testNotFoundRange() {
+		let storage = NSTextStorage(string: "abc")
+
+		let value = storage.substring(from: NSRange(location: NSNotFound, length: 1))
+
+		XCTAssertNil(value)
+	}
+}
