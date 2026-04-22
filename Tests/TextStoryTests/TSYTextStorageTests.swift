@@ -1,3 +1,8 @@
+#if canImport(AppKit) && !targetEnvironment(macCatalyst)
+import AppKit
+#else
+import UIKit
+#endif
 import Foundation
 import Testing
 
@@ -29,8 +34,6 @@ class MockDelegate: NSObject, TSYTextStorageDelegate {
 	}
 }
 
-import AppKit
-
 struct TSYTextStorageTests {
 	@Test
 	func testBeginEndEdit() throws {
@@ -55,3 +58,4 @@ struct TSYTextStorageTests {
 	}
 
 }
+#endif
